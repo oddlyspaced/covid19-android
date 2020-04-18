@@ -1,13 +1,17 @@
 package com.oddlyspaced.covid19india
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +48,27 @@ class MainActivity : AppCompatActivity() {
         val adapter = StatContainerAdapter(covidDataJsonParser.statList, this)
         recyclerStats.adapter = adapter
         txUpdateTime.text = covidDataJsonParser.date
+
+        recyclerStats.animate()
+            .setDuration(1)
+            .translationY(recyclerStats.height.toFloat())
+            .alpha(1.0f)
+            .setListener(null)
+
+        Handler().postDelayed({
+            // Prepare the View for the animation
+            recyclerStats.visibility = View.VISIBLE;
+            recyclerStats.alpha = 0.0f
+            recyclerStats.y = recyclerStats.y * 1.5F
+
+            // Start the animation
+            recyclerStats.animate()
+                .setDuration(500)
+                .translationY(0F)
+                .alpha(1.0f)
+                .setListener(null)
+
+        }, 1000)
     }
 
     private fun updateStatsStateWise() {

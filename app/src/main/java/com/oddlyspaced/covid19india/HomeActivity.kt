@@ -1,5 +1,6 @@
 package com.oddlyspaced.covid19india
 
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -46,7 +47,19 @@ class HomeActivity : AppCompatActivity() {
         val adapter = StatContainerAdapter(covidDataJsonParser.statList, this)
         recyclerStats.adapter = adapter
         txUpdateTime.text = covidDataJsonParser.date
+        animateTopStats()
+    }
 
+    private fun updateStatsStateWise() {
+        val layoutManager = LinearLayoutManager(this)
+        recyclerCases.setHasFixedSize(true)
+        recyclerCases.layoutManager = layoutManager
+        val adapter = CaseContainerAdapter(covidDataJsonParser.caseList, this)
+        recyclerCases.adapter = adapter
+        animateBottomCases()
+    }
+
+    private fun animateTopStats() {
         recyclerStats.animate()
             .setDuration(1)
             .translationY(recyclerStats.height.toFloat())
@@ -69,11 +82,90 @@ class HomeActivity : AppCompatActivity() {
         }, 1000)
     }
 
-    private fun updateStatsStateWise() {
-        val layoutManager = LinearLayoutManager(this)
-        recyclerCases.setHasFixedSize(true)
-        recyclerCases.layoutManager = layoutManager
-        val adapter = CaseContainerAdapter(covidDataJsonParser.caseList, this)
-        recyclerCases.adapter = adapter
+    private fun animateBottomCases() {
+
+        txInfo1.animate()
+            .setDuration(1)
+            .translationY(txInfo1.height.toFloat())
+            .alpha(1.0f)
+            .setListener(null)
+
+        Handler().postDelayed({
+            // Prepare the View for the animation
+            txInfo1.visibility = View.VISIBLE;
+            txInfo1.alpha = 0.0f
+            txInfo1.y = txInfo1.y * 1.5F
+
+            // Start the animation
+            txInfo1.animate()
+                .setDuration(1000)
+                .translationY(0F)
+                .alpha(1.0f)
+                .setListener(null)
+
+        }, 1000)
+
+        txInfo2.animate()
+            .setDuration(1)
+            .translationY(txInfo2.height.toFloat())
+            .alpha(1.0f)
+            .setListener(null)
+
+        Handler().postDelayed({
+            // Prepare the View for the animation
+            txInfo2.visibility = View.VISIBLE;
+            txInfo2.alpha = 0.0f
+            txInfo2.y = txInfo2.y * 1.5F
+
+            // Start the animation
+            txInfo2.animate()
+                .setDuration(750)
+                .translationY(0F)
+                .alpha(1.0f)
+                .setListener(null)
+
+        }, 1000)
+
+        clHeader.animate()
+            .setDuration(1)
+            .translationY(clHeader.height.toFloat())
+            .alpha(1.0f)
+            .setListener(null)
+
+        Handler().postDelayed({
+            // Prepare the View for the animation
+            clHeader.visibility = View.VISIBLE;
+            clHeader.alpha = 0.0f
+            clHeader.y = clHeader.y * 1.5F
+
+            // Start the animation
+            clHeader.animate()
+                .setDuration(750)
+                .translationY(0F)
+                .alpha(1.0f)
+                .setListener(null)
+
+        }, 1000)
+
+        recyclerCases.animate()
+            .setDuration(1)
+            .translationY(recyclerCases.height.toFloat())
+            .alpha(1.0f)
+            .setListener(null)
+
+        Handler().postDelayed({
+            // Prepare the View for the animation
+            recyclerCases.visibility = View.VISIBLE;
+            recyclerCases.alpha = 0.0f
+            recyclerCases.y = recyclerCases.y * 1.5F
+
+            // Start the animation
+            recyclerCases.animate()
+                .setDuration(1000)
+                .translationY(0F)
+                .alpha(1.0f)
+                .setListener(null)
+
+        }, 1000)
     }
 }

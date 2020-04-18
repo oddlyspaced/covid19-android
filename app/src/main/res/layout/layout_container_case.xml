@@ -45,9 +45,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvConfirmed"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"
         app:cardBackgroundColor="@color/colorBackgroundMedium"
         app:cardCornerRadius="4dp"
@@ -56,7 +55,7 @@
         app:layout_constraintEnd_toStartOf="@+id/cvActive"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toEndOf="@+id/cvState"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/cvState">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,7 +75,7 @@
 
             <TextView
                 android:id="@+id/txConfirmed"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
@@ -93,18 +92,17 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvActive"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         app:cardBackgroundColor="@color/colorBackgroundMedium"
         app:cardCornerRadius="4dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/cvConfirmed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toEndOf="@+id/cvConfirmed"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/cvConfirmed">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -112,7 +110,7 @@
 
             <TextView
                 android:id="@+id/txActive"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"

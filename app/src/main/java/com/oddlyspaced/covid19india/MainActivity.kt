@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateStats() {
         val list = ArrayList<StatContainerItem>()
-        list.add(StatContainerItem("Confirmed", "14,352", "+920"))
-        list.add(StatContainerItem("Confirmed", "14,352", "+920"))
-        list.add(StatContainerItem("Confirmed", "14,352", "+920"))
-        list.add(StatContainerItem("Confirmed", "14,352", "+920"))
-        list.add(StatContainerItem("Confirmed", "14,352", "+920"))
+        list.add(StatContainerItem("Confirmed", 14352, "+920"))
+        list.add(StatContainerItem("Confirmed", 14352, "+920"))
+        list.add(StatContainerItem("Confirmed", 14352, "+920"))
+        list.add(StatContainerItem("Confirmed", 14352, "+920"))
+        list.add(StatContainerItem("Confirmed", 14352, "+920"))
 
         val layoutManager = FlexboxLayoutManager(this)
         layoutManager.flexDirection = FlexDirection.ROW

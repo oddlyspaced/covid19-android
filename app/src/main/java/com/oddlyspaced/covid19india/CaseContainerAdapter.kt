@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CaseContainerAdapter(private val list: ArrayList<CaseContainerItem>, private val context: Context): RecyclerView.Adapter<CaseContainerAdapter.ViewHolder>() {
 
@@ -22,11 +25,11 @@ class CaseContainerAdapter(private val list: ArrayList<CaseContainerItem>, priva
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
         holder.state.text = item.state
-        holder.active.text = item.active.toString()
-        holder.confirmed.text = item.confirmed.toString()
+        holder.active.text = getFormatted(item.active)
+        holder.confirmed.text = getFormatted(item.confirmed)
         holder.inc.text = when(item.confirmedInc) {
             0 -> ""
-            else -> "↑${item.confirmedInc}"
+            else -> "↑${getFormatted(item.confirmedInc)}"
         }
 
         if (position%2 == 0) {
@@ -51,6 +54,11 @@ class CaseContainerAdapter(private val list: ArrayList<CaseContainerItem>, priva
         val bg = cv.background
         bg.setTint(context.getColor(R.color.colorBackgroundLight))
         cv.background = bg
+    }
+
+    private fun getFormatted(num: Int): String {
+        val numberFormat = NumberFormat.getInstance(Locale("en", "US"))
+        return numberFormat.format(num)
     }
 
 }

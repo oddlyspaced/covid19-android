@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StatContainerAdapter(private val list: ArrayList<StatContainerItem>, val context: Context): RecyclerView.Adapter<StatContainerAdapter.ViewHolder>() {
 
@@ -23,7 +26,7 @@ class StatContainerAdapter(private val list: ArrayList<StatContainerItem>, val c
         val item = list[position]
 
         holder.heading.text = item.heading
-        holder.value.text = item.value
+        holder.value.text = getFormatted(item.value)
         holder.desc.text = item.desc
 
         // cosmetic tweaks
@@ -72,6 +75,11 @@ class StatContainerAdapter(private val list: ArrayList<StatContainerItem>, val c
         var heading: TextView = itemView.findViewById(R.id.tvStatHeading)
         var value: TextView = itemView.findViewById(R.id.tvStatValue)
         var desc: TextView = itemView.findViewById(R.id.tvStatDesc)
+    }
+
+    private fun getFormatted(num: Int): String {
+        val numberFormat = NumberFormat.getInstance(Locale("en", "US"))
+        return numberFormat.format(num)
     }
 
 }

@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         recyclerStats.layoutManager = layoutManager
         val adapter = StatContainerAdapter(covidDataJsonParser.statList, this)
         recyclerStats.adapter = adapter
+        txUpdateTime.text = covidDataJsonParser.date
     }
 
     private fun updateStatsStateWise() {

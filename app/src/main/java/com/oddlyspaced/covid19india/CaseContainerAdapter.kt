@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 class CaseContainerAdapter(private val list: ArrayList<CaseContainerItem>, val context: Context): RecyclerView.Adapter<CaseContainerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_container_case, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_container_stat, parent, false)
         return ViewHolder(view)
     }
 

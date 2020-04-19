@@ -44,6 +44,11 @@ class HomeActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
+        viewTouchLinks.setOnClickListener {
+            startActivity(Intent(this, LinksActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
     }
 
     private fun isDataAvailable() {

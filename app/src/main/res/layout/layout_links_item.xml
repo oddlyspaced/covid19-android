@@ -7,32 +7,34 @@
     android:background="@color/colorBackgroundLight">
 
     <TextView
-        android:id="@+id/txQues"
+        android:id="@+id/txLinkTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/medium"
-        android:text="Who are you? "
+        android:text="Ministry of Health and Family Welfare, Gov. of India "
         android:textColor="@color/colorTextDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txAns"
+        android:id="@+id/txLinkTouch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorBlueLight"
         android:fontFamily="@font/medium"
-        android:text="We are a group of dedicated volunteers who curate and verify the data coming from several sources. We extract the details, like a patient's relationship with other patients to identify local and community transmissions, travel history and status. We never collect or expose any personally identifiable data regarding the patients. "
+        android:text="HTTPS://WWW.MOHFW.GOV.IN/"
         android:textColor="@color/colorAccent"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txQues" />
+        app:layout_constraintTop_toBottomOf="@+id/txLinkTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

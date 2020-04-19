@@ -39,6 +39,11 @@ class HomeActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
+        viewTouchFaq.setOnClickListener {
+            startActivity(Intent(this, FaqActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
     }
 
     private fun isDataAvailable() {
@@ -99,7 +104,7 @@ class HomeActivity : AppCompatActivity() {
                 .alpha(1.0f)
                 .setListener(null)
 
-        }, 1000)
+        }, 250)
     }
 
     private fun animateBottomCases() {
@@ -123,7 +128,7 @@ class HomeActivity : AppCompatActivity() {
                 .alpha(1.0f)
                 .setListener(null)
 
-        }, 1000)
+        }, 250)
 
         txInfo2.animate()
             .setDuration(1)
@@ -144,7 +149,7 @@ class HomeActivity : AppCompatActivity() {
                 .alpha(1.0f)
                 .setListener(null)
 
-        }, 1000)
+        }, 250)
 
         clHeader.animate()
             .setDuration(1)
@@ -165,7 +170,7 @@ class HomeActivity : AppCompatActivity() {
                 .alpha(1.0f)
                 .setListener(null)
 
-        }, 1000)
+        }, 250)
 
         recyclerCases.animate()
             .setDuration(1)
@@ -186,6 +191,6 @@ class HomeActivity : AppCompatActivity() {
                 .alpha(1.0f)
                 .setListener(null)
 
-        }, 1000)
+        }, 250)
     }
 }

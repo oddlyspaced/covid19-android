@@ -21,5 +21,15 @@ class DashboardActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
+        viewTouchFaq.setOnClickListener {
+            startActivity(Intent(this, FaqActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchLinks.setOnClickListener {
+            startActivity(Intent(this, LinksActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
     }
 }

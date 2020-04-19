@@ -1,6 +1,5 @@
-package com.oddlyspaced.covid19india
+package com.oddlyspaced.covid19india.activity
 
-import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -9,6 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.oddlyspaced.covid19india.util.CovidDataJsonParser
+import com.oddlyspaced.covid19india.R
+import com.oddlyspaced.covid19india.adapter.CaseContainerAdapter
+import com.oddlyspaced.covid19india.adapter.StatContainerAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
 
@@ -21,7 +24,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         // start fetching
-        covidDataJsonParser = CovidDataJsonParser()
+        covidDataJsonParser =
+            CovidDataJsonParser()
         covidDataJsonParser.fetchData()
 
         isDataAvailable()
@@ -44,7 +48,10 @@ class HomeActivity : AppCompatActivity() {
         layoutManager.flexDirection = FlexDirection.ROW
         layoutManager.justifyContent = JustifyContent.CENTER
         recyclerStats.layoutManager = layoutManager
-        val adapter = StatContainerAdapter(covidDataJsonParser.statList, this)
+        val adapter = StatContainerAdapter(
+            covidDataJsonParser.statList,
+            this
+        )
         recyclerStats.adapter = adapter
         txUpdateTime.text = covidDataJsonParser.date
         animateTopStats()
@@ -54,7 +61,10 @@ class HomeActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerCases.setHasFixedSize(true)
         recyclerCases.layoutManager = layoutManager
-        val adapter = CaseContainerAdapter(covidDataJsonParser.caseList, this)
+        val adapter = CaseContainerAdapter(
+            covidDataJsonParser.caseList,
+            this
+        )
         recyclerCases.adapter = adapter
         animateBottomCases()
     }

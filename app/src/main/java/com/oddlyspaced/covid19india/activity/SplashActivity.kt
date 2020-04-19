@@ -1,4 +1,4 @@
-package com.oddlyspaced.covid19india
+package com.oddlyspaced.covid19india.activity
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.oddlyspaced.covid19india.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
 

@@ -1,6 +1,8 @@
-package com.oddlyspaced.covid19india
+package com.oddlyspaced.covid19india.util
 
 import android.util.Log
+import com.oddlyspaced.covid19india.modal.CaseContainerItem
+import com.oddlyspaced.covid19india.modal.StatContainerItem
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.net.URL
@@ -33,15 +35,52 @@ class CovidDataJsonParser {
         val total = JSONObject(statewise.get(0).toString())
         parseDate(total.getString("lastupdatedtime"))
 
-        statList.add(StatContainerItem("Confirmed", total.getInt("confirmed"), "+${total.get("deltaconfirmed")}"))
-        statList.add(StatContainerItem("Active", total.getInt("active"), ""))
-        statList.add(StatContainerItem("Recovered", total.getInt("recovered"), "+${total.get("deltarecovered")}"))
-        statList.add(StatContainerItem("Deceased", total.getInt("deaths"), "+${total.get("deltadeaths")}"))
-        statList.add(StatContainerItem("Confirmed", total.getInt("confirmed"), "As of ${date.substringBeforeLast(",")}"))
+        statList.add(
+            StatContainerItem(
+                "Confirmed",
+                total.getInt("confirmed"),
+                "+${total.get("deltaconfirmed")}"
+            )
+        )
+        statList.add(
+            StatContainerItem(
+                "Active",
+                total.getInt("active"),
+                ""
+            )
+        )
+        statList.add(
+            StatContainerItem(
+                "Recovered",
+                total.getInt("recovered"),
+                "+${total.get("deltarecovered")}"
+            )
+        )
+        statList.add(
+            StatContainerItem(
+                "Deceased",
+                total.getInt("deaths"),
+                "+${total.get("deltadeaths")}"
+            )
+        )
+        statList.add(
+            StatContainerItem(
+                "Confirmed",
+                total.getInt("confirmed"),
+                "As of ${date.substringBeforeLast(",")}"
+            )
+        )
         caseList = ArrayList()
         for (item in 1 until statewise.length()) {
             val state = JSONObject(statewise.get(item).toString())
-            caseList.add(CaseContainerItem(state.getString("state"), state.getInt("confirmed"), state.getInt("deltaconfirmed"), state.getInt("active")))
+            caseList.add(
+                CaseContainerItem(
+                    state.getString("state"),
+                    state.getInt("confirmed"),
+                    state.getInt("deltaconfirmed"),
+                    state.getInt("active")
+                )
+            )
         }
 
 

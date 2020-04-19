@@ -1,4 +1,4 @@
-package com.oddlyspaced.covid19india
+package com.oddlyspaced.covid19india.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.oddlyspaced.covid19india.modal.CaseContainerItem
+import com.oddlyspaced.covid19india.R
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -15,7 +17,9 @@ class CaseContainerAdapter(private val list: ArrayList<CaseContainerItem>, priva
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_container_case, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {

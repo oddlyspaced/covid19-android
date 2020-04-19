@@ -38,4 +38,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'org.jetbrains.anko:anko-common:0.9'
+    implementation 'com.github.majorkik:SparkLineLayout:1.0.1'
 }

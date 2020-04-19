@@ -7,6 +7,7 @@
     <color name="colorBackgroundLight">#FFFFFF</color>
     <color name="colorAccent">#4C75F2</color>
     <color name="colorText">#6C757D</color>
+    <color name="colorTextHeading">#e23028</color>
     <color name="colorTextDark">#000000</color>
     <color name="colorTextNavDark">#000000</color>
     <color name="colorTextNavNormal">#6C757D</color>
@@ -25,4 +26,7 @@
     <color name="colorPurpleDark">#3a35ac</color>
     <color name="colorPurpleMedium">#6e6bc3</color>
     <color name="colorPurpleLight">#e3e2f3</color>
+    <color name="colorOrangeDark">#fd7e14</color>
+    <color name="colorOrangeMedium">#ffda6a</color>
+    <color name="colorOrangeLight">#fff7df</color>
 </resources>

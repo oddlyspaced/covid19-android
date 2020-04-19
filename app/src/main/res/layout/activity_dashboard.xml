@@ -68,17 +68,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/medium"
-                    android:text="Confirmed"
-                    android:textColor="@color/colorRedDark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <com.majorik.sparklinelibrary.SparkLineLayout
                     android:id="@+id/lineConfirmed"
                     android:layout_width="match_parent"
@@ -91,6 +80,43 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Confirmed"
+                    android:textColor="@color/colorRedDark"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txConfirmedMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/regular"
+                    android:text="17,304"
+                    android:textColor="@color/colorRedDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                <TextView
+                    android:id="@+id/txConfirmedInc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/regular"
+                    android:text="+1,581"
+                    android:textColor="@color/colorRedMedium"
+                    android:textSize="10sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/txConfirmedMain"
+                    app:layout_constraintStart_toEndOf="@+id/txConfirmedMain" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -115,17 +141,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/medium"
-                    android:text="Active"
-                    android:textColor="@color/colorBlueDark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <com.majorik.sparklinelibrary.SparkLineLayout
                     android:id="@+id/lineActive"
                     android:layout_width="match_parent"
@@ -138,6 +153,43 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Active"
+                    android:textColor="@color/colorBlueDark"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txActiveMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/regular"
+                    android:text="TextView"
+                    android:textColor="@color/colorBlueDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <TextView
+                    android:id="@+id/txActiveInc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/regular"
+                    android:text="TextView"
+                    android:textColor="@color/colorBlueMedium"
+                    android:textSize="10sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/txActiveMain"
+                    app:layout_constraintStart_toEndOf="@+id/txActiveMain" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -162,17 +214,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/medium"
-                    android:text="Recovered"
-                    android:textColor="@color/colorGreenDark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <com.majorik.sparklinelibrary.SparkLineLayout
                     android:id="@+id/lineRecovered"
                     android:layout_width="match_parent"
@@ -185,6 +226,44 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Recovered"
+                    android:textColor="@color/colorGreenDark"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txRecInc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/regular"
+                    android:text="TextView"
+                    android:textColor="@color/colorGreenMedium"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txRecMain"
+                    app:layout_constraintStart_toEndOf="@+id/txRecMain"
+                    app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                <TextView
+                    android:id="@+id/txRecMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/regular"
+                    android:text="TextView"
+                    android:textColor="@color/colorGreenDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -209,17 +288,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/medium"
-                    android:text="Deceased"
-                    android:textColor="@color/colorGrayDark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <com.majorik.sparklinelibrary.SparkLineLayout
                     android:id="@+id/lineDeceased"
                     android:layout_width="match_parent"
@@ -232,6 +300,43 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/medium"
+                    android:text="Deceased"
+                    android:textColor="@color/colorGrayDark"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txDecInc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/regular"
+                    android:text="TextView"
+                    android:textColor="@color/colorGrayMedium"
+                    android:textSize="10sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/txDecMain"
+                    app:layout_constraintStart_toEndOf="@+id/txDecMain" />
+
+                <TextView
+                    android:id="@+id/txDecMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/regular"
+                    android:text="TextView"
+                    android:textColor="@color/colorGrayDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -380,7 +485,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/txGraphType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -391,6 +496,16 @@
                     android:text="Cumulative"
                     android:textColor="@color/colorText"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/viewTouchGraphType"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:elevation="1dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

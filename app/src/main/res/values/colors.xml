@@ -7,6 +7,8 @@
     <color name="colorBackgroundLight">#FFFFFF</color>
     <color name="colorAccent">#4C75F2</color>
     <color name="colorText">#6C757D</color>
+    <color name="colorTextNavDark">#000000</color>
+    <color name="colorTextNavNormal">#6C757D</color>
     <color name="colorRedDark">#ff073a</color>
     <color name="colorRedMedium">#ff5e7f</color>
     <color name="colorRedLight">#ffe0e6</color>

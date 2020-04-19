@@ -94,7 +94,7 @@ class HomeActivity : AppCompatActivity() {
             // Prepare the View for the animation
             txInfo1.visibility = View.VISIBLE;
             txInfo1.alpha = 0.0f
-            txInfo1.y = txInfo1.y * 1.5F
+            txInfo1.y = txInfo1.y * 1.1F
 
             // Start the animation
             txInfo1.animate()
@@ -115,7 +115,7 @@ class HomeActivity : AppCompatActivity() {
             // Prepare the View for the animation
             txInfo2.visibility = View.VISIBLE;
             txInfo2.alpha = 0.0f
-            txInfo2.y = txInfo2.y * 1.5F
+            txInfo2.y = txInfo2.y * 1.1F
 
             // Start the animation
             txInfo2.animate()
@@ -136,7 +136,7 @@ class HomeActivity : AppCompatActivity() {
             // Prepare the View for the animation
             clHeader.visibility = View.VISIBLE;
             clHeader.alpha = 0.0f
-            clHeader.y = clHeader.y * 1.5F
+            clHeader.y = clHeader.y * 1.1F
 
             // Start the animation
             clHeader.animate()
@@ -157,7 +157,7 @@ class HomeActivity : AppCompatActivity() {
             // Prepare the View for the animation
             recyclerCases.visibility = View.VISIBLE;
             recyclerCases.alpha = 0.0f
-            recyclerCases.y = recyclerCases.y * 1.5F
+            recyclerCases.y = recyclerCases.y * 1.1F
 
             // Start the animation
             recyclerCases.animate()

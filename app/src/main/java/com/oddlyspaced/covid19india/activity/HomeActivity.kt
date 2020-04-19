@@ -1,5 +1,6 @@
 package com.oddlyspaced.covid19india.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -23,12 +24,21 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        setupBottomNavigation()
+
         // start fetching
-        covidDataJsonParser =
-            CovidDataJsonParser()
+        covidDataJsonParser = CovidDataJsonParser()
         covidDataJsonParser.fetchData()
 
         isDataAvailable()
+    }
+
+    private fun setupBottomNavigation() {
+        viewTouchDashboard.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
     }
 
     private fun isDataAvailable() {

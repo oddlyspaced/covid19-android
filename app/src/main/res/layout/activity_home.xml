@@ -239,7 +239,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/viewTouchHome"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewSelectionHome"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"
@@ -252,14 +262,14 @@
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintBottom_toTopOf="@+id/txNavHome"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/viewSelectionHome"
                 app:srcCompat="@drawable/ic_home" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/txNavHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -283,10 +293,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <View
-                android:id="@+id/view2"
+                android:id="@+id/viewTouchDashboard"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewSelectionDashboard"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
-                android:background="@color/colorBlueDark"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -296,14 +316,14 @@
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView7"
+                app:layout_constraintBottom_toTopOf="@+id/txNavDashboard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/viewSelectionDashboard"
                 app:srcCompat="@drawable/ic_dashboard" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/txNavDashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -327,10 +347,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/viewTouchLinks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewSelectionLinks"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -340,14 +370,14 @@
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView8"
+                app:layout_constraintBottom_toTopOf="@+id/txNavLinks"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/viewSelectionLinks"
                 app:srcCompat="@drawable/ic_link" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/txNavLinks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -371,10 +401,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <View
-                android:id="@+id/view4"
+                android:id="@+id/viewTouchFaq"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewSelectionFaq"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
-                android:background="@color/colorBlueDark"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -384,14 +424,14 @@
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView9"
+                app:layout_constraintBottom_toTopOf="@+id/txNavFaq"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view4"
+                app:layout_constraintTop_toBottomOf="@+id/viewSelectionFaq"
                 app:srcCompat="@drawable/ic_face" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txNavFaq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"

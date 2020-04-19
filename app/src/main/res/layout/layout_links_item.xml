@@ -28,7 +28,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/colorBlueLight"
+        android:defaultFocusHighlightEnabled="false"
         android:fontFamily="@font/medium"
         android:text="HTTPS://WWW.MOHFW.GOV.IN/"
         android:textColor="@color/colorAccent"

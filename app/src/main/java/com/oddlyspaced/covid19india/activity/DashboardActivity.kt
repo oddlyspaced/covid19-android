@@ -74,6 +74,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupGraphs() {
+        /*
         lineConfirmed.sparkLineColor = getColor(R.color.colorRedMedium)
         lineConfirmed.markerBorderSize = 8F
         lineConfirmed.sparkLineThickness = 8F
@@ -101,23 +102,30 @@ class DashboardActivity : AppCompatActivity() {
         lineDeceased.sparkLineBezier = 0.5F
         lineDeceased.markerBorderColor = getColor(R.color.colorGrayDark)
         lineDeceased.markerBackgroundColor = getColor(R.color.colorGrayDark)
+        */
+
     }
 
     private fun loadGraphsCumulative(stateCode: String) {
+        /*
         lineConfirmed.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataConfirmed(stateCode)))
         lineActive.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataActive(stateCode)))
         lineRecovered.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataRecovered(stateCode)))
         lineDeceased.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataDeceased(stateCode)))
+         */
     }
 
     private fun loadGraphsDaily(stateCode: String) {
+        /*
         lineConfirmed.setData(stateWiseDataParser.getDataConfirmed(stateCode))
         lineActive.setData(stateWiseDataParser.getDataActive(stateCode))
         lineRecovered.setData(stateWiseDataParser.getDataRecovered(stateCode))
         lineDeceased.setData(stateWiseDataParser.getDataDeceased(stateCode))
+         */
     }
 
     private fun loadGraphs(stateCode: String) {
+        /*
         lineConfirmed.setData(stateWiseDataParser.getDataConfirmed(stateCode))
         txConfirmedMain.text = stateWiseDataParser.getConfirmedTotal(stateCode)
         txConfirmedInc.text = stateWiseDataParser.getConfirmedInc(stateCode)
@@ -135,6 +143,8 @@ class DashboardActivity : AppCompatActivity() {
         lineDeceased.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataDeceased(stateCode)))
         txDecMain.text = stateWiseDataParser.getDeceasedTotal(stateCode)
         txDecInc.text = stateWiseDataParser.getDeceasedInc(stateCode)
+
+         */
     }
 
     private fun setupBottomNavigation() {

@@ -3,69 +3,60 @@ package com.oddlyspaced.covid19india.activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.util.StateWiseDataParser
+import com.robinhood.spark.SparkAdapter
+import com.robinhood.spark.animation.MorphSparkAnimator
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
 import kotlinx.android.synthetic.main.activity_home.viewTouchHome
 import kotlinx.android.synthetic.main.activity_home.viewTouchLinks
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var stateWiseDataParser: StateWiseDataParser
-    private var stCode = "tt"
+    private var stateCode = "tt"
+    private lateinit var confirmedAdapter: GraphAdapter
+    private lateinit var activeAdapter: GraphAdapter
+    private lateinit var recoveredAdapter: GraphAdapter
+    private lateinit var deceasedAdapter: GraphAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setupBottomNavigation()
         stateWiseDataParser = StateWiseDataParser()
-        checkJsonLoaded()
+        stateWiseDataParser.fetchData()
+        loadData()
     }
 
     private fun setupOnTouch() {
         viewTouchGraphType.setOnClickListener {
-            /*if (txGraphType.text == "Cumulative") {
-                loadGraphsDaily(stCode)
+            if (txGraphType.text == "Cumulative") {
+                loadGraphsDaily()
                 txGraphType.text = "Daily"
             }
             else {
-                loadGraphsCumulative(stCode)
+                loadGraphsCumulative()
                 txGraphType.text = "Cumulative"
-            }*/
+            }
         }
-    }
 
-    // this checks if json was fetched
-    private fun checkJsonLoaded() {
-        val bundle = intent.extras
-        val jsonFetched = bundle?.getInt("fetched")
-        if (jsonFetched == 1) {
-            stateWiseDataParser.json = bundle.getString("json").toString()
-            setupGraphs()
-            loadGraphs(stCode) // total
-            setupOnTouch()
-
+        viewTouchMonth.setOnClickListener {
+            stripToMonth()
         }
-        else {
-            stateWiseDataParser.fetchData()
-            loadData()
-        }
-    }
-
-    private fun callActivity() {
-        val intent = Intent(this, DashboardActivity::class.java)
-        intent.putExtra("json", stateWiseDataParser.json)
-        intent.putExtra("fetched", 1)
-        startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     private fun loadData() {
         Handler().postDelayed({
             if (stateWiseDataParser.fetched) {
-                callActivity()
+                setupGraphs()
+                loadGraphs()
+                setupOnTouch()
             }
             else {
                 loadData()
@@ -74,77 +65,86 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupGraphs() {
-        /*
-        lineConfirmed.sparkLineColor = getColor(R.color.colorRedMedium)
-        lineConfirmed.markerBorderSize = 8F
-        lineConfirmed.sparkLineThickness = 8F
-        lineConfirmed.sparkLineBezier = 0.5F
-        lineConfirmed.markerBorderColor = getColor(R.color.colorRedDark)
-        lineConfirmed.markerBackgroundColor = getColor(R.color.colorRedDark)
+        val animator = MorphSparkAnimator()
+        animator.setDuration(1000L)
 
-        lineActive.sparkLineColor = getColor(R.color.colorBlueMedium)
-        lineActive.markerBorderSize = 8F
-        lineActive.sparkLineThickness = 8F
-        lineActive.sparkLineBezier = 0.5F
-        lineActive.markerBorderColor = getColor(R.color.colorBlueDark)
-        lineActive.markerBackgroundColor = getColor(R.color.colorBlueDark)
+        lineConfirmed.lineColor = getColor(R.color.colorRedMedium)
+        lineConfirmed.cornerRadius = 32F
+        lineConfirmed.sparkAnimator = animator
 
-        lineRecovered.sparkLineColor = getColor(R.color.colorGreenMedium)
-        lineRecovered.markerBorderSize = 8F
-        lineRecovered.sparkLineThickness = 8F
-        lineRecovered.sparkLineBezier = 0.5F
-        lineRecovered.markerBorderColor = getColor(R.color.colorGreenDark)
-        lineRecovered.markerBackgroundColor = getColor(R.color.colorGreenDark)
+        lineActive.lineColor = getColor(R.color.colorBlueMedium)
+        lineActive.cornerRadius = 32F
+        lineActive.sparkAnimator = animator
 
-        lineDeceased.sparkLineColor = getColor(R.color.colorGrayMedium)
-        lineDeceased.markerBorderSize = 8F
-        lineDeceased.sparkLineThickness = 8F
-        lineDeceased.sparkLineBezier = 0.5F
-        lineDeceased.markerBorderColor = getColor(R.color.colorGrayDark)
-        lineDeceased.markerBackgroundColor = getColor(R.color.colorGrayDark)
-        */
+        lineRecovered.lineColor = getColor(R.color.colorGreenMedium)
+        lineRecovered.cornerRadius = 32F
+        lineRecovered.sparkAnimator = animator
+
+        lineDeceased.lineColor = getColor(R.color.colorGrayMedium)
+        lineDeceased.cornerRadius = 32F
+        lineDeceased.sparkAnimator = animator
+    }
+
+    private fun loadGraphsCumulative() {
+        confirmedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataConfirmed(stateCode))))
+        confirmedAdapter.update()
+
+        activeAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataActive(stateCode))))
+        activeAdapter.update()
+
+        recoveredAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataRecovered(stateCode))))
+        recoveredAdapter.update()
+
+        deceasedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataDeceased(stateCode))))
+        deceasedAdapter.update()
+
+
+        if (confirmedAdapter.data.equals(recoveredAdapter.data)) {
+            Log.e("wow", "weird")
+        }
+        else {
+            Log.e("wwww", "niooooooooo")
+        }
 
     }
 
-    private fun loadGraphsCumulative(stateCode: String) {
-        /*
-        lineConfirmed.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataConfirmed(stateCode)))
-        lineActive.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataActive(stateCode)))
-        lineRecovered.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataRecovered(stateCode)))
-        lineDeceased.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataDeceased(stateCode)))
-         */
+    private fun loadGraphsDaily() {
+        confirmedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataConfirmed(stateCode)))
+        confirmedAdapter.update()
+
+        activeAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataActive(stateCode)))
+        activeAdapter.update()
+
+        recoveredAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataRecovered(stateCode)))
+        recoveredAdapter.update()
+
+        deceasedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataDeceased(stateCode)))
+        deceasedAdapter.update()
+
     }
 
-    private fun loadGraphsDaily(stateCode: String) {
-        /*
-        lineConfirmed.setData(stateWiseDataParser.getDataConfirmed(stateCode))
-        lineActive.setData(stateWiseDataParser.getDataActive(stateCode))
-        lineRecovered.setData(stateWiseDataParser.getDataRecovered(stateCode))
-        lineDeceased.setData(stateWiseDataParser.getDataDeceased(stateCode))
-         */
-    }
-
-    private fun loadGraphs(stateCode: String) {
-        /*
-        lineConfirmed.setData(stateWiseDataParser.getDataConfirmed(stateCode))
+    private fun loadGraphs() {
+        confirmedAdapter = GraphAdapter()
+        lineConfirmed.adapter = confirmedAdapter
         txConfirmedMain.text = stateWiseDataParser.getConfirmedTotal(stateCode)
         txConfirmedInc.text = stateWiseDataParser.getConfirmedInc(stateCode)
 
-        lineConfirmed.setData(stateWiseDataParser.getDataConfirmed(stateCode))
-
-        lineActive.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataActive(stateCode)))
+        activeAdapter = GraphAdapter()
+        lineActive.adapter = activeAdapter
         txActiveMain.text = stateWiseDataParser.getActiveTotal(stateCode)
         txActiveInc.text = stateWiseDataParser.getActiveInc(stateCode)
 
-        lineRecovered.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataRecovered(stateCode)))
+        recoveredAdapter = GraphAdapter()
+        lineRecovered.adapter = confirmedAdapter
         txRecMain.text = stateWiseDataParser.getRecoveredTotal(stateCode)
         txRecInc.text = stateWiseDataParser.getRecoveredInc(stateCode)
 
-        lineDeceased.setData(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataDeceased(stateCode)))
+        deceasedAdapter = GraphAdapter()
+        lineDeceased.adapter = confirmedAdapter
         txDecMain.text = stateWiseDataParser.getDeceasedTotal(stateCode)
         txDecInc.text = stateWiseDataParser.getDeceasedInc(stateCode)
 
-         */
+        loadGraphsCumulative()
     }
 
     private fun setupBottomNavigation() {
@@ -163,5 +163,52 @@ class DashboardActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
+    }
+
+    private fun convertIntArrayListToFloatArray(d: ArrayList<Int>): Array<Float> {
+        return Array(d.size) {
+                i -> d[i].toFloat()
+        }.copyOf()
+    }
+
+    class GraphAdapter : SparkAdapter() {
+
+        var data = floatArrayOf(0F).toTypedArray()
+        lateinit var dataCopy: Array<Float>
+
+        override fun getY(index: Int): Float {
+            return data[index]
+        }
+
+        override fun getItem(index: Int): Any {
+            return data[index]
+        }
+
+        override fun getCount(): Int {
+            return data.size
+        }
+
+        fun updateData(d: Array<Float>) {
+            data = d.copyOf()
+            dataCopy = d.copyOf()
+        }
+
+        fun update() {
+            Log.e("changed", "hmmm")
+            notifyDataSetChanged()
+        }
+
+    }
+
+    private fun stripToBeginning() {
+    }
+
+    private fun stripToMonth() {
+        confirmedAdapter.data = Array<Float>(10){i -> i*2F}
+        confirmedAdapter.update()
+    }
+
+    private fun stripToWeeks() {
+
     }
 }

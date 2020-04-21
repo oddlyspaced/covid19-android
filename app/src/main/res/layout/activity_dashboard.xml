@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.majorik.sparklinelibrary.SparkLineLayout
+                <com.robinhood.spark.SparkView
                     android:id="@+id/lineConfirmed"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.majorik.sparklinelibrary.SparkLineLayout
+                <com.robinhood.spark.SparkView
                     android:id="@+id/lineActive"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -214,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.majorik.sparklinelibrary.SparkLineLayout
+                <com.robinhood.spark.SparkView
                     android:id="@+id/lineRecovered"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -288,7 +288,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.majorik.sparklinelibrary.SparkLineLayout
+                <com.robinhood.spark.SparkView
                     android:id="@+id/lineDeceased"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

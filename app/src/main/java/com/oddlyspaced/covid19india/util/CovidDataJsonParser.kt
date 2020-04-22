@@ -11,23 +11,33 @@ class CovidDataJsonParser {
 
     private val tag = "CovidDataJsonParser"
     private val link = "https://api.covid19india.org/data.json"
+    private lateinit var data: String
     var fetched = false
     var processed = false
 
     lateinit var date: String
     lateinit var statList: ArrayList<StatContainerItem>
     lateinit var caseList: ArrayList<CaseContainerItem>
+    lateinit var stateCodeList: ArrayList<String>
+    lateinit var stateNameList: ArrayList<String>
+    lateinit var stateDateList: ArrayList<String>
 
     fun fetchData() {
         doAsync {
             val apiResponse : String = URL(link).readText()
             Log.d(tag, "JSON Fetched")
-            parseData(apiResponse)
+            data = apiResponse
+            parseData()
             fetched = true
         }
     }
 
-    private fun parseData(data: String) {
+    private fun parseData() {
+
+        stateNameList = ArrayList()
+        stateCodeList = ArrayList()
+        stateDateList = ArrayList()
+
         val jsonObj = JSONObject(data)
         val statewise = jsonObj.getJSONArray("statewise")
         // first item in statewise is total stats
@@ -70,9 +80,20 @@ class CovidDataJsonParser {
                 "As of ${date.substringBeforeLast(",")}"
             )
         )
+
+        stateCodeList.add(total.get("state").toString())
+
+        stateNameList.add(total.get("statecode").toString())
+        stateDateList.add(total.get("lastupdatedtime").toString())
+
+
+
         caseList = ArrayList()
         for (item in 1 until statewise.length()) {
             val state = JSONObject(statewise.get(item).toString())
+            stateCodeList.add(state.getString("state"))
+            stateNameList.add(state.getString("statecode"))
+            stateDateList.add(parseDateState(state.getString("lastupdatedtime")))
             caseList.add(
                 CaseContainerItem(
                     state.getString("state"),
@@ -87,9 +108,12 @@ class CovidDataJsonParser {
         processed = true
     }
 
-    private fun parseDate(d: String){
+    private fun createStateLists() {
+
+    }
+
+    private fun parseDate(d: String) {
         // d -- 18/04/2020 00:45:05
-        Log.e("asdsdsdsds", d.substring(d.indexOf("/")+1, d.lastIndexOf("/")))
         var dd = d.substringBefore("/")
         val mm = when ((d.substring(d.indexOf("/") + 1, d.lastIndexOf("/")))) {
             "01" -> "Jan"
@@ -106,11 +130,34 @@ class CovidDataJsonParser {
             "12" -> "Dec"
             else -> "???"
         }
-        Log.e("Ssds", "cacac")
         dd = "$dd $mm"
         val time = d.substring(d.indexOf(" ")+1, d.lastIndexOf(":"))
         dd = "$dd, $time IST"
         date = dd
+    }
+
+    private fun parseDateState(d: String): String{
+        // d -- 18/04/2020 00:45:05
+        var dd = d.substringBefore("/")
+        val mm = when ((d.substring(d.indexOf("/") + 1, d.lastIndexOf("/")))) {
+            "01" -> "Jan"
+            "02" -> "Feb"
+            "03" -> "Mar"
+            "04" -> "Apr"
+            "05" -> "May"
+            "06" -> "Jun"
+            "07" -> "Jul"
+            "08" -> "Aug"
+            "09" -> "Sep"
+            "10" -> "Oct"
+            "11" -> "Nov"
+            "12" -> "Dec"
+            else -> "???"
+        }
+        dd = "$dd $mm"
+        val time = d.substring(d.indexOf(" ")+1, d.lastIndexOf(":"))
+        dd = "$dd, $time IST"
+        return dd
     }
 
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.net.URL
+import java.nio.file.Files.size
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -12,8 +13,15 @@ class StateWiseDataParser {
 
     private val tag = "StateDataParser"
     private val link = "https://api.covid19india.org/states_daily.json"
-    var json = ""
+    private var json = ""
     var fetched = false
+
+    private lateinit var stateCode: String
+
+    lateinit var dataConfirmed: Array<Float>
+    lateinit var dataActive: Array<Float>
+    lateinit var dataRecovered: Array<Float>
+    lateinit var dataDeceased: Array<Float>
 
     fun fetchData() {
         doAsync {
@@ -23,93 +31,96 @@ class StateWiseDataParser {
         }
     }
 
-    fun getDataConfirmed(stateCode: String): ArrayList<Int> {
+    fun parseData(sc: String) {
+        stateCode = sc
+        parseDataConfirmed()
+        parseDataDeceased()
+        parseDataRecovered()
+        parseDataActive()
+    }
+
+    private fun parseDataConfirmed(){
         val daily = JSONObject(json).getJSONArray("states_daily")
-        val values = ArrayList<Int>()
+        dataConfirmed = Array(daily.length()/3) { 0F }
+        var index = 0
         for (item in 1 until daily.length()) {
             if (JSONObject(daily.get(item).toString()).getString("status") == "Confirmed") {
-                values.add(JSONObject(daily.get(item).toString()).getInt(stateCode))
+                dataConfirmed[index++] = JSONObject(daily.get(item).toString()).getInt(stateCode).toFloat()
             }
         }
-        Log.e("len", values.size.toString())
-        return values
     }
 
-    fun getConfirmedTotal(stateCode: String): String {
-        return getFormatted(getDataConfirmed(stateCode).sum())
-    }
-
-    fun getConfirmedInc(stateCode: String): String {
-        return "+${getFormatted(getDataConfirmed(stateCode).last())}"
-    }
-
-    fun getDataRecovered(stateCode: String): ArrayList<Int> {
+    private fun parseDataRecovered(){
         val daily = JSONObject(json).getJSONArray("states_daily")
-        val values = ArrayList<Int>()
+        dataRecovered = Array(daily.length()/3) { 0F }
+        var index = 0
         for (item in 1 until daily.length()) {
             if (JSONObject(daily.get(item).toString()).getString("status") == "Recovered") {
-                values.add(JSONObject(daily.get(item).toString()).getInt(stateCode))
+                dataRecovered[index++] = JSONObject(daily.get(item).toString()).getInt(stateCode).toFloat()
             }
         }
-        Log.e("len", values.size.toString())
-        return values
     }
 
-    fun getRecoveredTotal(stateCode: String): String {
-        return getFormatted(getDataRecovered(stateCode).sum())
-    }
-
-    fun getRecoveredInc(stateCode: String): String {
-        return "+${getFormatted(getDataRecovered(stateCode).last())}"
-    }
-
-    fun getDataDeceased(stateCode: String): ArrayList<Int> {
+    private fun parseDataDeceased(){
         val daily = JSONObject(json).getJSONArray("states_daily")
-        val values = ArrayList<Int>()
+        dataDeceased = Array(daily.length()/3) { 0F }
+        var index = 0
         for (item in 1 until daily.length()) {
             if (JSONObject(daily.get(item).toString()).getString("status") == "Deceased") {
-                values.add(JSONObject(daily.get(item).toString()).getInt(stateCode))
+                dataDeceased[index++] = JSONObject(daily.get(item).toString()).getInt(stateCode).toFloat()
             }
         }
-        Log.e("len", values.size.toString())
-        return values
     }
 
-    fun getDeceasedTotal(stateCode: String): String {
-        return getFormatted(getDataDeceased(stateCode).sum())
-    }
+    private fun parseDataActive(){
+        val daily = JSONObject(json).getJSONArray("states_daily")
+        dataActive = Array(daily.length()/3) { 0F }
 
-    fun getDeceasedInc(stateCode: String): String {
-        return "+${getFormatted(getDataDeceased(stateCode).last())}"
-    }
-
-    fun getDataActive(stateCode: String): ArrayList<Int> {
-        val con = getDataConfirmed(stateCode)
-        val rec = getDataRecovered(stateCode)
-        val dec = getDataDeceased(stateCode)
-        val act = ArrayList<Int>()
-        for (i in 0 until con.size) {
-            act.add(con[i] - rec[i] - dec[i])
+        for (i in dataConfirmed.indices) {
+            dataActive[i] = dataConfirmed[i] - dataDeceased[i] - dataRecovered[i]
         }
-        return act
     }
 
-    fun getActiveTotal(stateCode: String): String {
-        return getFormatted(getDataActive(stateCode).sum())
+    fun getConfirmedTotal(): String {
+        return getFormatted(dataConfirmed.sum().toInt())
     }
 
-    fun getActiveInc(stateCode: String): String {
-        return "+${getFormatted(getDataActive(stateCode).last())}"
+    fun getActiveTotal(): String {
+        return getFormatted(dataActive.sum().toInt())
     }
 
-    fun generateCumulative(x: ArrayList<Int>): ArrayList<Int> {
-        val y = ArrayList<Int>()
-        for (i in 0 until x.size) {
-            var sum = 0
+    fun getRecoveredTotal(): String {
+        return getFormatted(dataRecovered.sum().toInt())
+    }
+
+    fun getDeceasedTotal(): String {
+        return getFormatted(dataDeceased.sum().toInt())
+    }
+
+    fun getConfirmedInc(): String {
+        return "+${getFormatted(dataConfirmed.last().toInt())}"
+    }
+
+    fun getActiveInc(): String {
+        return "+${getFormatted(dataActive.last().toInt())}"
+    }
+
+    fun getRecoveredInc(): String {
+        return "+${getFormatted(dataRecovered.last().toInt())}"
+    }
+
+    fun getDeceasedInc(): String {
+        return "+${getFormatted(dataDeceased.last().toInt())}"
+    }
+
+    fun generateCumulative(x: Array<Float>): Array<Float> {
+        val y = Array(x.size) {0.0F}
+        for ((yi, i) in x.indices.withIndex()) {
+            var sum = 0F
             for (j in 0..i) {
                 sum += x[j]
             }
-            y.add(sum)
+            y[yi] = sum
         }
         return y
     }

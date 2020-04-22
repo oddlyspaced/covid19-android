@@ -32,7 +32,7 @@ class CovidDataJsonParser {
         }
     }
 
-    private fun parseData() {
+    fun parseData() {
 
         stateNameList = ArrayList()
         stateCodeList = ArrayList()
@@ -81,9 +81,9 @@ class CovidDataJsonParser {
             )
         )
 
-        stateCodeList.add(total.get("state").toString())
+        stateCodeList.add(total.get("statecode").toString())
 
-        stateNameList.add(total.get("statecode").toString())
+        stateNameList.add(total.get("state").toString())
         stateDateList.add(total.get("lastupdatedtime").toString())
 
 

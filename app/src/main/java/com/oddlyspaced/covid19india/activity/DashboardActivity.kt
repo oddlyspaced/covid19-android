@@ -1,11 +1,13 @@
 package com.oddlyspaced.covid19india.activity
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.oddlyspaced.covid19india.R
+import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.util.StateWiseDataParser
 import com.robinhood.spark.SparkAdapter
 import com.robinhood.spark.animation.MorphSparkAnimator
@@ -19,7 +21,14 @@ import kotlin.collections.ArrayList
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var stateWiseDataParser: StateWiseDataParser
+    private lateinit var covidDataJsonParser: CovidDataJsonParser
+
     private var stateCode = "tt"
+    private lateinit var stateCodeList: ArrayList<String>
+    private lateinit var stateNameList: ArrayList<String>
+    private lateinit var stateDateList: ArrayList<String>
+    private var stateIndex: Int = 0
+
     private lateinit var confirmedAdapter: GraphAdapter
     private lateinit var activeAdapter: GraphAdapter
     private lateinit var recoveredAdapter: GraphAdapter
@@ -29,9 +38,12 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setupBottomNavigation()
+        covidDataJsonParser = CovidDataJsonParser()
+        covidDataJsonParser.fetchData()
+
         stateWiseDataParser = StateWiseDataParser()
         stateWiseDataParser.fetchData()
-        loadData()
+        loadStateList()
     }
 
     private fun setupOnTouch() {
@@ -46,17 +58,60 @@ class DashboardActivity : AppCompatActivity() {
             }
         }
 
+        viewTouchBeginning.setOnClickListener {
+            consBeginning.background = getDrawable(R.color.colorOrangeMedium)
+            consMonth.background = getDrawable(R.color.colorOrangeLight)
+            consWeek.background = getDrawable(R.color.colorOrangeLight)
+            stripToBeginning()
+        }
+
         viewTouchMonth.setOnClickListener {
+            consBeginning.background = getDrawable(R.color.colorOrangeLight)
+            consMonth.background = getDrawable(R.color.colorOrangeMedium)
+            consWeek.background = getDrawable(R.color.colorOrangeLight)
             stripToMonth()
         }
+
+        viewTouchWeek.setOnClickListener {
+            consBeginning.background = getDrawable(R.color.colorOrangeLight)
+            consMonth.background = getDrawable(R.color.colorOrangeLight)
+            consWeek.background = getDrawable(R.color.colorOrangeMedium)
+            stripToWeeks()
+        }
+
+        txState.setOnClickListener {
+            if (stateIndex == stateCodeList.size - 1)
+                stateIndex = 0
+            else
+                stateIndex++
+            stateCode = stateCodeList[stateIndex]
+            txState.text = stateNameList[stateIndex]
+            reload()
+        }
+    }
+
+    private fun loadStateList() {
+        Handler().postDelayed({
+            if (covidDataJsonParser.fetched) {
+
+                covidDataJsonParser.parseData()
+                stateCodeList = covidDataJsonParser.stateCodeList
+                stateNameList = covidDataJsonParser.stateNameList
+                stateDateList = covidDataJsonParser.stateDateList
+                stateCode = stateCodeList[0]
+                txState.text = stateNameList[0]
+                loadData()
+            }
+            else {
+                loadStateList()
+            }
+        }, 100)
     }
 
     private fun loadData() {
         Handler().postDelayed({
             if (stateWiseDataParser.fetched) {
-                setupGraphs()
-                loadGraphs()
-                setupOnTouch()
+                reload()
             }
             else {
                 loadData()
@@ -64,85 +119,104 @@ class DashboardActivity : AppCompatActivity() {
         }, 100)
     }
 
-    private fun setupGraphs() {
-        val animator = MorphSparkAnimator()
-        animator.setDuration(1000L)
+    private fun reload() {
+        stateWiseDataParser.parseData(stateCode)
+        setupGraphs()
+        loadGraphs()
+        setupOnTouch()
+    }
 
+    private fun setupGraphs() {
         lineConfirmed.lineColor = getColor(R.color.colorRedMedium)
-        lineConfirmed.cornerRadius = 32F
-        lineConfirmed.sparkAnimator = animator
+        lineConfirmed.cornerRadius = 16F
 
         lineActive.lineColor = getColor(R.color.colorBlueMedium)
         lineActive.cornerRadius = 32F
-        lineActive.sparkAnimator = animator
 
         lineRecovered.lineColor = getColor(R.color.colorGreenMedium)
         lineRecovered.cornerRadius = 32F
-        lineRecovered.sparkAnimator = animator
 
         lineDeceased.lineColor = getColor(R.color.colorGrayMedium)
         lineDeceased.cornerRadius = 32F
-        lineDeceased.sparkAnimator = animator
     }
 
     private fun loadGraphsCumulative() {
-        confirmedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataConfirmed(stateCode))))
+
+        confirmedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataConfirmed))
         confirmedAdapter.update()
 
-        activeAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataActive(stateCode))))
+        activeAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataActive))
         activeAdapter.update()
 
-        recoveredAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataRecovered(stateCode))))
+        recoveredAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataRecovered))
         recoveredAdapter.update()
 
-        deceasedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.generateCumulative(stateWiseDataParser.getDataDeceased(stateCode))))
+        deceasedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataDeceased))
         deceasedAdapter.update()
-
-
-        if (confirmedAdapter.data.equals(recoveredAdapter.data)) {
-            Log.e("wow", "weird")
-        }
-        else {
-            Log.e("wwww", "niooooooooo")
-        }
 
     }
 
     private fun loadGraphsDaily() {
-        confirmedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataConfirmed(stateCode)))
+        confirmedAdapter.updateData(stateWiseDataParser.dataConfirmed)
         confirmedAdapter.update()
 
-        activeAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataActive(stateCode)))
+        activeAdapter.updateData(stateWiseDataParser.dataActive)
         activeAdapter.update()
 
-        recoveredAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataRecovered(stateCode)))
+        recoveredAdapter.updateData(stateWiseDataParser.dataRecovered)
         recoveredAdapter.update()
 
-        deceasedAdapter.updateData(convertIntArrayListToFloatArray(stateWiseDataParser.getDataDeceased(stateCode)))
+        deceasedAdapter.updateData(stateWiseDataParser.dataDeceased)
         deceasedAdapter.update()
 
     }
 
     private fun loadGraphs() {
-        confirmedAdapter = GraphAdapter()
-        lineConfirmed.adapter = confirmedAdapter
-        txConfirmedMain.text = stateWiseDataParser.getConfirmedTotal(stateCode)
-        txConfirmedInc.text = stateWiseDataParser.getConfirmedInc(stateCode)
 
-        activeAdapter = GraphAdapter()
-        lineActive.adapter = activeAdapter
-        txActiveMain.text = stateWiseDataParser.getActiveTotal(stateCode)
-        txActiveInc.text = stateWiseDataParser.getActiveInc(stateCode)
+        confirmedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            confirmedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataConfirmed))
+        else
+            confirmedAdapter.updateData(stateWiseDataParser.dataConfirmed)
+        lineConfirmed.adapter = confirmedAdapter
+        confirmedAdapter.update()
 
         recoveredAdapter = GraphAdapter()
-        lineRecovered.adapter = confirmedAdapter
-        txRecMain.text = stateWiseDataParser.getRecoveredTotal(stateCode)
-        txRecInc.text = stateWiseDataParser.getRecoveredInc(stateCode)
+        if (txGraphType.text == "Cumulative")
+            recoveredAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataRecovered))
+        else
+            recoveredAdapter.updateData(stateWiseDataParser.dataRecovered)
+        lineRecovered.adapter = recoveredAdapter
+        recoveredAdapter.update()
+
+        activeAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            activeAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataActive))
+        else
+            activeAdapter.updateData(stateWiseDataParser.dataActive)
+        lineActive.adapter = activeAdapter
+        activeAdapter.update()
+
 
         deceasedAdapter = GraphAdapter()
-        lineDeceased.adapter = confirmedAdapter
-        txDecMain.text = stateWiseDataParser.getDeceasedTotal(stateCode)
-        txDecInc.text = stateWiseDataParser.getDeceasedInc(stateCode)
+        if (txGraphType.text == "Cumulative")
+            deceasedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataDeceased))
+        else
+            deceasedAdapter.updateData(stateWiseDataParser.dataDeceased)
+        lineDeceased.adapter = deceasedAdapter
+        deceasedAdapter.update()
+
+        txConfirmedMain.text = stateWiseDataParser.getConfirmedTotal()
+        txConfirmedInc.text = stateWiseDataParser.getConfirmedInc()
+
+        txActiveMain.text = stateWiseDataParser.getActiveTotal()
+        txActiveInc.text = stateWiseDataParser.getActiveInc()
+
+        txRecMain.text = stateWiseDataParser.getRecoveredTotal()
+        txRecInc.text = stateWiseDataParser.getRecoveredInc()
+
+        txDecMain.text = stateWiseDataParser.getDeceasedTotal()
+        txDecInc.text = stateWiseDataParser.getDeceasedInc()
 
         loadGraphsCumulative()
     }
@@ -163,12 +237,6 @@ class DashboardActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
-    }
-
-    private fun convertIntArrayListToFloatArray(d: ArrayList<Int>): Array<Float> {
-        return Array(d.size) {
-                i -> d[i].toFloat()
-        }.copyOf()
     }
 
     class GraphAdapter : SparkAdapter() {
@@ -194,21 +262,121 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         fun update() {
-            Log.e("changed", "hmmm")
             notifyDataSetChanged()
         }
 
     }
 
     private fun stripToBeginning() {
+        confirmedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            confirmedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataConfirmed))
+        else
+            confirmedAdapter.updateData(stateWiseDataParser.dataConfirmed)
+        lineConfirmed.adapter = confirmedAdapter
+        confirmedAdapter.update()
+
+        recoveredAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            recoveredAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataRecovered))
+        else
+            recoveredAdapter.updateData(stateWiseDataParser.dataRecovered)
+        lineRecovered.adapter = recoveredAdapter
+        recoveredAdapter.update()
+
+        activeAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            activeAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataActive))
+        else
+            activeAdapter.updateData(stateWiseDataParser.dataActive)
+        lineActive.adapter = activeAdapter
+        activeAdapter.update()
+
+
+        deceasedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            deceasedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataDeceased))
+        else
+            deceasedAdapter.updateData(stateWiseDataParser.dataDeceased)
+        lineDeceased.adapter = deceasedAdapter
+        deceasedAdapter.update()
     }
 
     private fun stripToMonth() {
-        confirmedAdapter.data = Array<Float>(10){i -> i*2F}
+        confirmedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            confirmedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataConfirmed))
+        else
+            confirmedAdapter.updateData(stateWiseDataParser.dataConfirmed)
+        confirmedAdapter.data = confirmedAdapter.dataCopy.sliceArray(confirmedAdapter.dataCopy.size-31 until confirmedAdapter.dataCopy.size)
+        lineConfirmed.adapter = confirmedAdapter
         confirmedAdapter.update()
+
+        recoveredAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            recoveredAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataRecovered))
+        else
+            recoveredAdapter.updateData(stateWiseDataParser.dataRecovered)
+        recoveredAdapter.data = recoveredAdapter.dataCopy.sliceArray(recoveredAdapter.dataCopy.size-31 until recoveredAdapter.dataCopy.size)
+        lineRecovered.adapter = recoveredAdapter
+        recoveredAdapter.update()
+
+        activeAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            activeAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataActive))
+        else
+            activeAdapter.updateData(stateWiseDataParser.dataActive)
+        activeAdapter.data = activeAdapter.dataCopy.sliceArray(activeAdapter.dataCopy.size-31 until activeAdapter.dataCopy.size)
+        lineActive.adapter = activeAdapter
+        activeAdapter.update()
+
+        deceasedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            deceasedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataDeceased))
+        else
+            deceasedAdapter.updateData(stateWiseDataParser.dataDeceased)
+        deceasedAdapter.data = deceasedAdapter.dataCopy.sliceArray(deceasedAdapter.dataCopy.size-31 until deceasedAdapter.dataCopy.size)
+        lineDeceased.adapter = deceasedAdapter
+        deceasedAdapter.update()
+
     }
 
     private fun stripToWeeks() {
+        confirmedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            confirmedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataConfirmed))
+        else
+            confirmedAdapter.updateData(stateWiseDataParser.dataConfirmed)
+        confirmedAdapter.data = confirmedAdapter.dataCopy.sliceArray(confirmedAdapter.dataCopy.size-14 until confirmedAdapter.dataCopy.size)
+        lineConfirmed.adapter = confirmedAdapter
+        confirmedAdapter.update()
 
+        recoveredAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            recoveredAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataRecovered))
+        else
+            recoveredAdapter.updateData(stateWiseDataParser.dataRecovered)
+        recoveredAdapter.data = recoveredAdapter.dataCopy.sliceArray(recoveredAdapter.dataCopy.size-14 until recoveredAdapter.dataCopy.size)
+        lineRecovered.adapter = recoveredAdapter
+        recoveredAdapter.update()
+
+        activeAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            activeAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataActive))
+        else
+            activeAdapter.updateData(stateWiseDataParser.dataActive)
+        activeAdapter.data = activeAdapter.dataCopy.sliceArray(activeAdapter.dataCopy.size-14 until activeAdapter.dataCopy.size)
+        lineActive.adapter = activeAdapter
+        activeAdapter.update()
+
+
+        deceasedAdapter = GraphAdapter()
+        if (txGraphType.text == "Cumulative")
+            deceasedAdapter.updateData(stateWiseDataParser.generateCumulative(stateWiseDataParser.dataDeceased))
+        else
+            deceasedAdapter.updateData(stateWiseDataParser.dataDeceased)
+        deceasedAdapter.data = deceasedAdapter.dataCopy.sliceArray(deceasedAdapter.dataCopy.size-14 until deceasedAdapter.dataCopy.size)
+        lineDeceased.adapter = deceasedAdapter
+        deceasedAdapter.update()
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundLight"
-    tools:context=".activity.FaqActivity">
+    tools:context=".activity.AboutActivity">
 
     <TextView
         android:id="@+id/textView8"

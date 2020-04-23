@@ -1,21 +1,17 @@
 package com.oddlyspaced.covid19india.activity
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.util.StateWiseDataParser
 import com.robinhood.spark.SparkAdapter
-import com.robinhood.spark.animation.MorphSparkAnimator
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
 import kotlinx.android.synthetic.main.activity_home.viewTouchHome
 import kotlinx.android.synthetic.main.activity_home.viewTouchLinks
-import java.util.*
 import kotlin.collections.ArrayList
 
 class DashboardActivity : AppCompatActivity() {
@@ -228,7 +224,7 @@ class DashboardActivity : AppCompatActivity() {
             finish()
         }
         viewTouchFaq.setOnClickListener {
-            startActivity(Intent(this, FaqActivity::class.java))
+            startActivity(Intent(this, AboutActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

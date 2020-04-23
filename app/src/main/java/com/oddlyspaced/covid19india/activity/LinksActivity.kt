@@ -30,7 +30,7 @@ class LinksActivity : AppCompatActivity() {
             finish()
         }
         viewTouchFaq.setOnClickListener {
-            startActivity(Intent(this, FaqActivity::class.java))
+            startActivity(Intent(this, AboutActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

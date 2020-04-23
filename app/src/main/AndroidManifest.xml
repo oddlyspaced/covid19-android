@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.LinksActivity"></activity>
-        <activity android:name=".activity.FaqActivity" />
+        <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.SplashActivity">

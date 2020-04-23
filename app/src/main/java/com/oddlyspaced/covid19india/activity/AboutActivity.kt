@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.adapter.FaqAdapter
 import com.oddlyspaced.covid19india.modal.FaqItem
-import kotlinx.android.synthetic.main.activity_faq.*
+import kotlinx.android.synthetic.main.activity_about.*
 
-class FaqActivity : AppCompatActivity() {
+class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_faq)
+        setContentView(R.layout.activity_about)
         setupBottomNavigation()
         loadFaq()
     }

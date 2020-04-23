@@ -539,7 +539,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/medium"
-                android:text="Maharashtra"
                 android:textColor="@color/colorTextHeading"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
@@ -547,7 +546,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/txDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -555,7 +554,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/medium"
-                android:text="Last Updated on 19 Apr, 21:03 IST "
                 android:textColor="@color/colorText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

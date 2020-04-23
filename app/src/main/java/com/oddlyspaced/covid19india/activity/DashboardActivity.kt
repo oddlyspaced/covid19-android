@@ -82,6 +82,7 @@ class DashboardActivity : AppCompatActivity() {
                 stateIndex++
             stateCode = stateCodeList[stateIndex]
             txState.text = stateNameList[stateIndex]
+            txDate.text = "Last Updated on ${stateDateList[stateIndex]}"
             reload()
         }
     }
@@ -96,6 +97,7 @@ class DashboardActivity : AppCompatActivity() {
                 stateDateList = covidDataJsonParser.stateDateList
                 stateCode = stateCodeList[0]
                 txState.text = stateNameList[0]
+                txDate.text = "Last Updated on ${stateDateList[0]}"
                 loadData()
             }
             else {
@@ -120,6 +122,10 @@ class DashboardActivity : AppCompatActivity() {
         setupGraphs()
         loadGraphs()
         setupOnTouch()
+        txGraphType.text = "Cumulative"
+        consBeginning.background = getDrawable(R.color.colorOrangeMedium)
+        consMonth.background = getDrawable(R.color.colorOrangeLight)
+        consWeek.background = getDrawable(R.color.colorOrangeLight)
     }
 
     private fun setupGraphs() {

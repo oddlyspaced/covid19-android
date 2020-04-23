@@ -135,25 +135,9 @@ class HomeActivity : AppCompatActivity() {
 
         }, 250)
 
-        txInfo2.animate()
-            .setDuration(1)
-            .translationY(txInfo2.height.toFloat())
-            .alpha(1.0f)
-            .setListener(null)
 
         Handler().postDelayed({
             // Prepare the View for the animation
-            txInfo2.visibility = View.VISIBLE;
-            txInfo2.alpha = 0.0f
-            txInfo2.y = txInfo2.y * 1.1F
-
-            // Start the animation
-            txInfo2.animate()
-                .setDuration(750)
-                .translationY(0F)
-                .alpha(1.0f)
-                .setListener(null)
-
         }, 250)
 
         clHeader.animate()

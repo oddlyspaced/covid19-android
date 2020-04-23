@@ -53,27 +53,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:fontFamily="@font/regular"
-        android:text="Compiled from State Govt. numbers,"
-        android:textSize="10sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/txInfo2"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerStats" />
-
-    <TextView
-        android:id="@+id/txInfo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/regular"
-        android:text="know more!"
+        android:text="Compiled from State Govt. numbers"
         android:textSize="10sp"
-        android:textStyle="italic"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/txInfo1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txInfo1" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerStats" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerStats"

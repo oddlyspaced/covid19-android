@@ -4,10 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.oddlyspaced.covid19india.R
-import com.oddlyspaced.covid19india.adapter.FaqAdapter
-import com.oddlyspaced.covid19india.modal.FaqItem
 import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : AppCompatActivity() {

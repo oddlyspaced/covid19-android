@@ -6,6 +6,8 @@ import com.oddlyspaced.covid19india.modal.StatContainerItem
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.net.URL
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CovidDataJsonParser {
 
@@ -81,18 +83,16 @@ class CovidDataJsonParser {
             )
         )
 
-        stateCodeList.add(total.get("statecode").toString())
+        stateCodeList.add(total.get("statecode").toString().toLowerCase(Locale.ROOT).trim())
 
         stateNameList.add(total.get("state").toString())
         stateDateList.add(total.get("lastupdatedtime").toString())
 
-
-
         caseList = ArrayList()
         for (item in 1 until statewise.length()) {
             val state = JSONObject(statewise.get(item).toString())
-            stateCodeList.add(state.getString("state"))
-            stateNameList.add(state.getString("statecode"))
+            stateCodeList.add(state.getString("statecode").toLowerCase(Locale.ROOT))
+            stateNameList.add(state.getString("state"))
             stateDateList.add(parseDateState(state.getString("lastupdatedtime")))
             caseList.add(
                 CaseContainerItem(

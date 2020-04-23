@@ -45,7 +45,11 @@ class StateWiseDataParser {
         var index = 0
         for (item in 1 until daily.length()) {
             if (JSONObject(daily.get(item).toString()).getString("status") == "Confirmed") {
-                dataConfirmed[index++] = JSONObject(daily.get(item).toString()).getInt(stateCode).toFloat()
+                dataConfirmed[index++] = when(JSONObject(daily.get(item).toString()).get(stateCode))  {
+                    "" -> 0F
+                    else -> JSONObject(daily.get(item).toString()).get(stateCode).toString().toFloat()
+                    // covid19 india api has one place where the value is "" so i had to add that as an exception
+                }
             }
         }
     }

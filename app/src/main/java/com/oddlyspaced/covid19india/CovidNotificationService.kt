@@ -56,7 +56,7 @@ class CovidNotificationService: Service() {
     private fun createNotificationChannel() {
         val name = getString(R.string.app_name)
         val descriptionText = getString(R.string.app_name)
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val importance = NotificationManager.IMPORTANCE_MIN
         val channel = NotificationChannel(notificationChannelId, name, importance).apply {
             description = descriptionText
         }

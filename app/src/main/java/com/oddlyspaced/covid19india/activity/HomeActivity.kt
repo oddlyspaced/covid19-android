@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.oddlyspaced.covid19india.FeatureActivity
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.adapter.CaseContainerAdapter
@@ -40,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
             finish()
         }
         viewTouchFaq.setOnClickListener {
-            startActivity(Intent(this, AboutActivity::class.java))
+            startActivity(Intent(this, FeatureActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

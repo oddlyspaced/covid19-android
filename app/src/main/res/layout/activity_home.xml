@@ -422,7 +422,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/regular"
-                android:text="FAQ"
+                android:text="About"
                 android:textColor="@color/colorTextNavNormal"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -16,6 +16,10 @@
             android:name=".CovidNotificationService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".HandWashService"
+            android:enabled="true"
+            android:exported="true" />
         <activity android:name=".FeatureActivity"></activity>
         <activity android:name=".activity.LinksActivity" />
         <activity android:name=".activity.AboutActivity" />

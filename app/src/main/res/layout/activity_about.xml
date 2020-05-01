@@ -305,7 +305,7 @@
             android:layout_marginEnd="16dp"
             android:background="@color/colorBlueLight"
             android:fontFamily="@font/medium"
-            android:text="COVID19INDIA - android"
+            android:text=" COVID19INDIA - android "
             android:textColor="@color/colorAccent"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -351,7 +351,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/medium"
-                    android:text="OPEN SOURCED ON GITHUB"
+                    android:text="open sourced on github"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -409,7 +409,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/medium"
-                    android:text="VISIT covid19india.org"
+                    android:text="Visit covid19india.org"
                     android:textColor="@color/colorBlueDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -428,5 +428,17 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/regular"
+        android:text="Developed by: oddlyspaced"
+        android:textColor="@color/colorText"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

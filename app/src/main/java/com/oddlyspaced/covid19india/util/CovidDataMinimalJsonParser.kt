@@ -1,4 +1,4 @@
-package com.oddlyspaced.covid19india
+package com.oddlyspaced.covid19india.util
 
 import android.util.Log
 import org.jetbrains.anko.doAsync

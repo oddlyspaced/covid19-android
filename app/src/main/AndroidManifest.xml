@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".CovidNotificationService"
+            android:name=".service.CovidNotificationService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".HandWashService"
+            android:name=".service.HandWashService"
             android:enabled="true"
             android:exported="true" />
-        <activity android:name=".FeatureActivity"></activity>
+        <activity android:name=".activity.FeatureActivity"></activity>
         <activity android:name=".activity.LinksActivity" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.DashboardActivity" />

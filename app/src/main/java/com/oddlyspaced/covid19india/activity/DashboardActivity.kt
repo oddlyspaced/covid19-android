@@ -4,14 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.oddlyspaced.covid19india.FeatureActivity
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.util.StateWiseDataParser
 import com.robinhood.spark.SparkAdapter
-import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.activity_dashboard.viewTouchDashboard
 import kotlinx.android.synthetic.main.activity_dashboard.viewTouchFeatures
 import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
 import kotlinx.android.synthetic.main.activity_home.viewTouchHome

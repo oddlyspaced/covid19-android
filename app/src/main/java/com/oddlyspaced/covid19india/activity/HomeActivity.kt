@@ -9,17 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.oddlyspaced.covid19india.FeatureActivity
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.adapter.CaseContainerAdapter
 import com.oddlyspaced.covid19india.adapter.StatContainerAdapter
-import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.viewTouchDashboard
 import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
 import kotlinx.android.synthetic.main.activity_home.viewTouchFeatures
-import kotlinx.android.synthetic.main.activity_home.viewTouchHome
 import kotlinx.android.synthetic.main.activity_home.viewTouchLinks
 
 

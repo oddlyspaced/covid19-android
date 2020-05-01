@@ -1,16 +1,13 @@
-package com.oddlyspaced.covid19india
+package com.oddlyspaced.covid19india.activity
 
 import android.app.ActivityManager
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.oddlyspaced.covid19india.activity.AboutActivity
-import com.oddlyspaced.covid19india.activity.DashboardActivity
-import com.oddlyspaced.covid19india.activity.HomeActivity
-import com.oddlyspaced.covid19india.activity.LinksActivity
-import kotlinx.android.synthetic.main.activity_about.*
+import com.oddlyspaced.covid19india.R
+import com.oddlyspaced.covid19india.service.CovidNotificationService
+import com.oddlyspaced.covid19india.service.HandWashService
 import kotlinx.android.synthetic.main.activity_feature.*
 import kotlinx.android.synthetic.main.activity_feature.viewTouchDashboard
 import kotlinx.android.synthetic.main.activity_feature.viewTouchFaq

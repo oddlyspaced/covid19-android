@@ -7,6 +7,20 @@
     android:background="@color/colorPrimary"
     tools:context=".activity.HomeActivity">
 
+    <TextView
+        android:id="@+id/txNoInternet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:fontFamily="@font/medium"
+        android:text="No Internet Connection Available!"
+        android:textColor="@color/colorTextDark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"

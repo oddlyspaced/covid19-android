@@ -13,6 +13,7 @@ import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.adapter.CaseContainerAdapter
 import com.oddlyspaced.covid19india.adapter.StatContainerAdapter
+import com.oddlyspaced.covid19india.util.CheckInternet
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_home.viewTouchDashboard
 import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
@@ -29,11 +30,25 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setupBottomNavigation()
+        checkNetwork()
+    }
 
-        // start fetching
+    private fun checkNetwork() {
+        if (CheckInternet().isConnectionAvailable(this)) {
+            yesNetwork()
+        }
+        else {
+            noNetwork()
+        }
+    }
+
+    private fun noNetwork() {
+      txNoInternet.visibility = View.VISIBLE
+    }
+
+    private fun yesNetwork() {
         covidDataJsonParser = CovidDataJsonParser()
         covidDataJsonParser.fetchData()
-
         isDataAvailable()
     }
 

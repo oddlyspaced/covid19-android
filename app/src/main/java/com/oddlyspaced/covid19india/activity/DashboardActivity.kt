@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.util.CheckInternet
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
@@ -154,6 +155,8 @@ class DashboardActivity : AppCompatActivity() {
 
         lineDeceased.lineColor = getColor(R.color.colorGrayMedium)
         lineDeceased.cornerRadius = 32F
+
+        Snackbar.make(rvMain, "Tap on the location name to cycle between locations!", Snackbar.LENGTH_LONG).show()
     }
 
     private fun loadGraphsCumulative() {

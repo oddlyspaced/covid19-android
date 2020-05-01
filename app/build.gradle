@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'org.jetbrains.anko:anko-common:0.9'
     implementation 'com.robinhood.spark:spark:1.2.0'
+    implementation "com.google.android.material:material:1.2.0-alpha06"
 }

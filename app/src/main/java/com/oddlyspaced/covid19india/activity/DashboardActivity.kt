@@ -4,11 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.oddlyspaced.covid19india.FeatureActivity
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.util.StateWiseDataParser
 import com.robinhood.spark.SparkAdapter
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_dashboard.viewTouchDashboard
+import kotlinx.android.synthetic.main.activity_dashboard.viewTouchFeatures
 import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
 import kotlinx.android.synthetic.main.activity_home.viewTouchHome
 import kotlinx.android.synthetic.main.activity_home.viewTouchLinks
@@ -229,13 +233,18 @@ class DashboardActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
-        viewTouchFaq.setOnClickListener {
-            startActivity(Intent(this, AboutActivity::class.java))
+        viewTouchLinks.setOnClickListener {
+            startActivity(Intent(this, LinksActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
-        viewTouchLinks.setOnClickListener {
-            startActivity(Intent(this, LinksActivity::class.java))
+        viewTouchFeatures.setOnClickListener {
+            startActivity(Intent(this, FeatureActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchFaq.setOnClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

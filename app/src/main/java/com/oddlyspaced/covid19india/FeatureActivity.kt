@@ -6,13 +6,25 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.oddlyspaced.covid19india.activity.AboutActivity
+import com.oddlyspaced.covid19india.activity.DashboardActivity
+import com.oddlyspaced.covid19india.activity.HomeActivity
+import com.oddlyspaced.covid19india.activity.LinksActivity
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_feature.*
+import kotlinx.android.synthetic.main.activity_feature.viewTouchDashboard
+import kotlinx.android.synthetic.main.activity_feature.viewTouchFaq
+import kotlinx.android.synthetic.main.activity_feature.viewTouchFeatures
+import kotlinx.android.synthetic.main.activity_feature.viewTouchHome
+import kotlinx.android.synthetic.main.activity_feature.viewTouchLinks
 
 class FeatureActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feature)
+
+        setupBottomNavigation()
 
         cbNotificationToggle.isChecked = isStatsServiceRunning()
         cbNotificationToggle.setOnCheckedChangeListener { _, isChecked ->
@@ -40,6 +52,34 @@ class FeatureActivity : AppCompatActivity() {
                 startService(intent)
 
             }
+        }
+    }
+
+    private fun setupBottomNavigation() {
+        viewTouchHome.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchDashboard.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchLinks.setOnClickListener {
+            startActivity(Intent(this, LinksActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchFeatures.setOnClickListener {
+            startActivity(Intent(this, FeatureActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchFaq.setOnClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
         }
     }
 

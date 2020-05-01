@@ -4,10 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.oddlyspaced.covid19india.FeatureActivity
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.adapter.LinksAdapter
 import com.oddlyspaced.covid19india.modal.LinksItem
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_links.*
+import kotlinx.android.synthetic.main.activity_links.viewTouchDashboard
+import kotlinx.android.synthetic.main.activity_links.viewTouchFaq
+import kotlinx.android.synthetic.main.activity_links.viewTouchFeatures
+import kotlinx.android.synthetic.main.activity_links.viewTouchHome
+import kotlinx.android.synthetic.main.activity_links.viewTouchLinks
 
 class LinksActivity : AppCompatActivity() {
 
@@ -26,6 +33,11 @@ class LinksActivity : AppCompatActivity() {
         }
         viewTouchDashboard.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchFeatures.setOnClickListener {
+            startActivity(Intent(this, FeatureActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

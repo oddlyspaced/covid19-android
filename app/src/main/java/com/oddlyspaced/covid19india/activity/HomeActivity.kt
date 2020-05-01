@@ -14,7 +14,13 @@ import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.R
 import com.oddlyspaced.covid19india.adapter.CaseContainerAdapter
 import com.oddlyspaced.covid19india.adapter.StatContainerAdapter
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.viewTouchDashboard
+import kotlinx.android.synthetic.main.activity_home.viewTouchFaq
+import kotlinx.android.synthetic.main.activity_home.viewTouchFeatures
+import kotlinx.android.synthetic.main.activity_home.viewTouchHome
+import kotlinx.android.synthetic.main.activity_home.viewTouchLinks
 
 
 class HomeActivity : AppCompatActivity() {
@@ -40,13 +46,18 @@ class HomeActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
-        viewTouchFaq.setOnClickListener {
+        viewTouchLinks.setOnClickListener {
+            startActivity(Intent(this, LinksActivity::class.java))
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        viewTouchFeatures.setOnClickListener {
             startActivity(Intent(this, FeatureActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
-        viewTouchLinks.setOnClickListener {
-            startActivity(Intent(this, LinksActivity::class.java))
+        viewTouchFaq.setOnClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

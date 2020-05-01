@@ -113,6 +113,7 @@ class DashboardActivity : AppCompatActivity() {
                 stateCode = stateCodeList[0]
                 txState.text = stateNameList[0]
                 txDate.text = "Last Updated on ${stateDateList[0]}"
+                Snackbar.make(rvMain, "Tap on the location name to cycle between locations!", Snackbar.LENGTH_LONG).show()
                 loadData()
             }
             else {
@@ -155,8 +156,6 @@ class DashboardActivity : AppCompatActivity() {
 
         lineDeceased.lineColor = getColor(R.color.colorGrayMedium)
         lineDeceased.cornerRadius = 32F
-
-        Snackbar.make(rvMain, "Tap on the location name to cycle between locations!", Snackbar.LENGTH_LONG).show()
     }
 
     private fun loadGraphsCumulative() {

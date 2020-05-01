@@ -77,7 +77,7 @@ class HandWashService: Service() {
             .setWhen(System.currentTimeMillis())
 
         val notification = builder.build()
-        startForeground(1, notification)
+        startForeground(2, notification)
     }
 
     private fun handwashNotify() {

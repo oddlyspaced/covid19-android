@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorBackgroundDark">#1c1e1f</color>
+    <color name="colorBackgroundMedium">#1c1e1f</color>
+    <color name="colorBackgroundLight">#000000</color>
+    <color name="colorAccent">#4C75F2</color>
+    <color name="colorText">#6C757D</color>
+    <color name="colorTextHeading">#e23028</color>
+    <color name="colorTextDark">#FFFFFF</color>
+    <color name="colorTextNavDark">#FFFFFF</color>
+    <color name="colorTextNavNormal">#6C757D</color>
+    <color name="colorRedDark">#fd325b</color>
+    <color name="colorRedMedium">#a82641</color>
+    <color name="colorRedLight">#2d161b</color>
+    <color name="colorBlueDark">#31a0fd</color>
+    <color name="colorBlueMedium">#266aa3</color>
+    <color name="colorBlueLight">#161d24</color>
+    <color name="colorGreenDark">#7dde93</color>
+    <color name="colorGreenMedium">#529261</color>
+    <color name="colorGreenLight">#17271d</color>
+    <color name="colorGrayDark">#bbb6ac</color>
+    <color name="colorGrayMedium">#716f6b</color>
+    <color name="colorGrayLight">#181b1c</color>
+    <color name="colorPurpleDark">#6c8dcf</color>
+    <color name="colorPurpleMedium">#52699c</color>
+    <color name="colorPurpleLight">#17182a</color>
+    <color name="colorOrangeDark">#fd7e14</color>
+    <color name="colorOrangeMedium">#82640b</color>
+    <color name="colorOrangeLight">#2f2a18</color>
+</resources>

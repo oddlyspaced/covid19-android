@@ -3,8 +3,10 @@ package com.oddlyspaced.covid19india.activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.oddlyspaced.covid19india.R
+import com.oddlyspaced.covid19india.util.CheckInternet
 import com.oddlyspaced.covid19india.util.CovidDataJsonParser
 import com.oddlyspaced.covid19india.util.StateWiseDataParser
 import com.robinhood.spark.SparkAdapter
@@ -35,12 +37,23 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setupBottomNavigation()
-        covidDataJsonParser = CovidDataJsonParser()
-        covidDataJsonParser.fetchData()
 
-        stateWiseDataParser = StateWiseDataParser()
-        stateWiseDataParser.fetchData()
-        loadStateList()
+        checkInternet()
+    }
+
+    private fun checkInternet() {
+        if (CheckInternet().isConnectionAvailable(this)) {
+            rvMain.visibility = View.VISIBLE
+            covidDataJsonParser = CovidDataJsonParser()
+            covidDataJsonParser.fetchData()
+
+            stateWiseDataParser = StateWiseDataParser()
+            stateWiseDataParser.fetchData()
+            loadStateList()
+        }
+        else {
+            txNoInternet.visibility = View.VISIBLE
+        }
     }
 
     private fun setupOnTouch() {

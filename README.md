@@ -4,6 +4,9 @@
 
 COVID19INDIA is an Android App based on [covid19india](https://github.com/covid19india) and [novelCOVID](https://github.com/NovelCOVID)'s public api which presents Covid19 Stats regarding India in a simplified and easy to read way.
 
+### Download
+[Direct Download Link](https://github.com/oddlyspaced/covid19-android/raw/master/covid19india.apk)
+
 ## Features
 * Daily aswell as total stats of covid19 cases in India
 * SparkLine graph visualising case trends across all Indian States and Union Territories

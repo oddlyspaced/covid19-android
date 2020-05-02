@@ -21,14 +21,14 @@ COVID19INDIA is an Android App based on [covid19india](https://github.com/covid1
 
 ## Dependencies
 Apart from the standard google issued UI libraries that come standard with Android Studio the following external libraries have been used :-
-[FlexBox Android (by Google)](https://github.com/google/flexbox-layout)
-[anko (by Kotlin)](https://github.com/Kotlin/anko)
-[spark (by robinhood)](https://github.com/robinhood/spark)
+* [FlexBox Android (by Google)](https://github.com/google/flexbox-layout)
+* [anko (by Kotlin)](https://github.com/Kotlin/anko)
+* [spark (by robinhood)](https://github.com/robinhood/spark)
 
 ## External Links
-[covid19India.org](https://www.covid19india.org/)
-[MOFHW India](https://www.mohfw.gov.in/)
-[WHO - Covid19](https://www.who.int/emergencies/diseases/novel-coronavirus-2019)
+* [covid19India.org](https://www.covid19india.org/)
+* [MOFHW India](https://www.mohfw.gov.in/)
+* [WHO - Covid19](https://www.who.int/emergencies/diseases/novel-coronavirus-2019)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
